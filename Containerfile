@@ -9,9 +9,9 @@ RUN apt update && apt install -y \
 	pkg-config \
 	wget
 
-RUN wget -O- https://github.com/tmux/tmux/archive/3.2.tar.gz  | tar -xzvf -
-WORKDIR tmux-3.2
+RUN wget -O- https://github.com/tmux/tmux/archive/3.3a.tar.gz  | tar -xzvf -
+WORKDIR tmux-3.3a
 RUN ./autogen.sh && ./configure --enable-static && make -j8
 
 FROM scratch as exporter
-COPY --from=build-stage /tmux-3.2/tmux /
+COPY --from=build-stage /tmux-3.3a/tmux /
