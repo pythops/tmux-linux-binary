@@ -2,20 +2,22 @@
 
 You can download the pre-built binaries in the release page.
 
-> Those binaries are built for *Linux x86_64*
+> Those binaries are built for _Linux x86_64_
 
 ### Building
 
-If you want to build it yourself, follow those instructions:
-> You need to have Docker installed on your machine.
+Make sure you have [podman](https://github.com/containers/podman) installed on your machine first
+
+To build the binary follow those instructions:
 
 ```
-$ export DOCKER_BUILDKIT=1
 $ git clone https://github.com/pythops/tmux-linux-binary
 $ cd tmux-linux-binary
-$ docker build --output artifacts .
+$ podman build  -f Containerfile --output artifacts .
 ```
+
 The binary will be inside artifacts directory.
 
 ### License
+
 MIT
