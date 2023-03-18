@@ -1,10 +1,8 @@
-## Static tmux binaries
+# Static tmux binaries
 
 You can download the pre-built binaries in the release page.
 
-> Those binaries are built for _Linux x86_64_
-
-### Building
+## Building
 
 Make sure you have [podman](https://github.com/containers/podman) installed on your machine first
 
@@ -18,6 +16,6 @@ $ podman build  -f Containerfile --output artifacts .
 
 The binary will be inside artifacts directory.
 
-### License
+## License
 
 MIT
