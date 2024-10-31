@@ -1,6 +1,6 @@
 FROM ubuntu:latest as build-stage
 
-ARG TMUX_VERSION=3.5
+ARG TMUX_VERSION=3.5a
 ENV TMUX_VERSION=${TMUX_VERSION}
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt install -y \
