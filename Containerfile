@@ -1,5 +1,8 @@
 FROM ubuntu:latest as build-stage
-ENV  DEBIAN_FRONTEND noninteractive
+
+ARG TMUX_VERSION=3.5
+ENV TMUX_VERSION=${TMUX_VERSION}
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt install -y \
 	automake \
 	bison \
@@ -9,9 +12,10 @@ RUN apt update && apt install -y \
 	pkg-config \
 	wget
 
-RUN wget -O- https://github.com/tmux/tmux/archive/3.5.tar.gz  | tar -xzvf -
-WORKDIR tmux-3.5
+RUN wget -O- https://github.com/tmux/tmux/archive/${TMUX_VERSION}.tar.gz  | tar -xzvf -
+WORKDIR tmux-${TMUX_VERSION}
 RUN ./autogen.sh && ./configure --enable-static && make -j8
 
 FROM scratch as exporter
-COPY --from=build-stage /tmux-3.5/tmux /
+ARG TMUX_VERSION
+COPY --from=build-stage /tmux-${TMUX_VERSION}/tmux /
