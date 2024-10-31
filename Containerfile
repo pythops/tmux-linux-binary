@@ -12,10 +12,10 @@ RUN apt update && apt install -y \
 	pkg-config \
 	wget
 
-RUN wget -O- https://github.com/tmux/tmux/archive/${TMUX_VERSION}.tar.gz  | tar -xzvf -
-WORKDIR tmux-${TMUX_VERSION}
+RUN wget -O- https://github.com/tmux/tmux/archive/${TMUX_VERSION}.tar.gz  | tar -xzvf - && \
+    mv tmux-${TMUX_VERSION} /tmux
+WORKDIR tmux
 RUN ./autogen.sh && ./configure --enable-static && make -j8
 
 FROM scratch as exporter
-ARG TMUX_VERSION
-COPY --from=build-stage /tmux-${TMUX_VERSION}/tmux /
+COPY --from=build-stage /tmux/tmux /
